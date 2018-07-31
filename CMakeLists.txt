@@ -22,7 +22,7 @@ add_library(physic++ SHARED ${physic_src})
 include_directories (${physic_path})
 
 # Build tests
-add_subdirectory(${physic_path}/test)
+add_subdirectory(${physic_path}/tests)
 
 # Build playground
 set(sfml sfml-graphics sfml-window sfml-system)

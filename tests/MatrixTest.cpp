@@ -39,8 +39,8 @@ TEST(MatrixTest, MatrixMatrixOperators)
                           {4, 5, 6},
                           {7, 8, 9}});
 
-    ArraysMatch({{2, 4, 6},
-                 {8, 10, 12},
+    ArraysMatch({{2,   4,  6},
+                 {8,  10, 12},
                  {14, 16, 18}},
                 a + a);
 
@@ -49,8 +49,8 @@ TEST(MatrixTest, MatrixMatrixOperators)
                  {0, 0, 0}},
                 a - a);
 
-    ArraysMatch({{30, 36, 42},
-                 {66, 81, 96},
+    ArraysMatch({{30,   36,  42},
+                 {66,   81,  96},
                  {102, 126, 150}},
                 a * a);
 }
@@ -61,18 +61,18 @@ TEST(MatrixTest, MatrixSkalarOperators)
                           {4, 5, 6},
                           {7, 8, 9}});
 
-    ArraysMatch({{3, 4, 5},
-                 {6, 7, 8},
+    ArraysMatch({{3,  4,  5},
+                 {6,  7,  8},
                  {9, 10, 11}},
                 a + 2);
 
     ArraysMatch({{-1, 0, 1},
-                 {2, 3, 4},
-                 {5, 6, 7}},
+                 { 2, 3, 4},
+                 { 5, 6, 7}},
                 a - 2);
 
-    ArraysMatch({{2, 4, 6},
-                 {8, 10, 12},
+    ArraysMatch({{2,   4,  6},
+                 {8,  10, 12},
                  {14, 16, 18}},
                 a * 2);
 
@@ -84,7 +84,31 @@ TEST(MatrixTest, MatrixSkalarOperators)
 
 TEST(MatrixTest, TransposeDeterminantInverse)
 {
-    EXPECT_TRUE(true);
+    math::Matrix<3, 3> a({{1, 2, 3},
+                          {4, 5, 6},
+                          {7, 8, 9}});
+
+    math::Vector<3> b({1, 2, 3});
+
+    ArraysMatch({{1, 4, 7},
+                 {2, 5, 8},
+                 {3, 6, 9}},
+                math::transpose(a));
+
+    ArraysMatch({{1, 2, 3}},
+                math::transpose(b));
+
+    math::Matrix<3, 3> c({{1, -2,  3},
+                          {-4, 5, -6},
+                          {7,  8,  9}});
+
+    EXPECT_FLOAT_EQ(0, math::det(a));
+    EXPECT_FLOAT_EQ(-96, math::det(c));
+
+    ArraysMatch({{-0.96875, -0.4375,   0.03125},
+                 { 0.0625,   0.125,    0.0625},
+                 { 0.697917, 0.229167, 0.03125}},
+                math::inv(c));
 }
 
 TEST(MatrixTest, VectorSpecificFreeFunctions)

@@ -401,7 +401,6 @@ namespace math
     Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOfCols> &l_other,
                                                  const Matrix<numberOfCols, numberOfRows> &r_other)
     {
-
         Matrix<numberOfRows, numberOfRows> result;
 
         for(size_t i = 0; i < numberOfRows; ++i)
@@ -492,10 +491,8 @@ namespace math
 template <size_t numberOfRows, size_t numberOfCols>
 std::ostream &operator<<(std::ostream &stream, const math::Matrix<numberOfRows, numberOfCols> &matrix)
 {
-
     for(size_t i = 0; i < numberOfRows; ++i)
     {
-
         for(size_t j = 0; j < numberOfCols; ++j)
         {
             stream << matrix(i, j) << "\t";

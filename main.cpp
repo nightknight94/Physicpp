@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+// TODO: Check test coverage
 // TODO: Make sure everywhere SI is used
 // TODO: Converter between SI and pixels
 int main()
@@ -19,7 +20,7 @@ int main()
     circles[1].m_position = math::Vector<2>({400, 200});
 
     circles[0].setMaterial(materials::Bouncy);
-    circles[1].setMaterial(materials::Wood);
+    circles[1].setMaterial(materials::Static);
 
     while(window.isOpen())
     {

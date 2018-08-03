@@ -10,7 +10,6 @@ namespace physic
 } // namespace physic
 
 
-// TODO: add more materials
 namespace materials
 {
     constexpr physic::Material Rock{
@@ -31,5 +30,20 @@ namespace materials
     constexpr physic::Material Bouncy{
         .m_density = 0.3,
         .m_restitution = 0.8,
+    };
+
+    constexpr physic::Material SuperBouncy{
+        .m_density = 0.3,
+        .m_restitution = 0.95,
+    };
+
+    constexpr physic::Material Pillow{
+        .m_density = 0.1,
+        .m_restitution = 0.2,
+    };
+
+    constexpr physic::Material Static{
+        .m_density = 0.0,
+        .m_restitution = 0.4,
     };
 } // namespace materials

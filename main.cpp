@@ -26,7 +26,7 @@ int main()
     {
         circles[0].m_force += math::Vector<2>({0.0, 9.81 * circles[0].m_mass});
 
-        physic::collision(circles[0], circles[1]);
+        physic::Collision(circles[0], circles[1]);
 
         sf::Event event;
         while(window.pollEvent(event))

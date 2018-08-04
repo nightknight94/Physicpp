@@ -14,7 +14,7 @@ add_custom_target(full_test
 				   DEPENDS ${CMAKE_BINARY_DIR}/gtests)
 
 # Build shared library
-set(physic_path ${CMAKE_SOURCE_DIR})
+set(physic_path ${CMAKE_SOURCE_DIR}/physic++)
 FILE(GLOB physic_src ${physic_path}/*.cpp)
 add_library(physic++ SHARED ${physic_src})
 
@@ -22,7 +22,8 @@ add_library(physic++ SHARED ${physic_src})
 include_directories (${physic_path})
 
 # Build tests
-add_subdirectory(${physic_path}/tests)
+set(test_path ${CMAKE_SOURCE_DIR}/tests)
+add_subdirectory(${test_path})
 
 # Build playground
 set(sfml sfml-graphics sfml-window sfml-system)

@@ -1,15 +1,18 @@
 #include "Body.hpp"
+#include "Shape.hpp"
 
 namespace physic
 {
-    Body::Body()
+    Body::Body(const Shape & s)
+    :
+        shape(s)
     {
         setMaterial(m_material);
     }
 
     void Body::setMaterial(const Material &material)
     {
-        double volume = 2 * 3.1415 * m_shape.getRadius(); // shape.getVolume()
+        double volume = shape.getVolume();
 
         m_material = material;
         m_mass = Mass(volume * m_material.m_density);
@@ -19,8 +22,6 @@ namespace physic
     {
         m_velocity += (m_force / m_mass) * dt;
         m_position += m_velocity * dt;
-
-        m_shape.setPosition(m_position(0), m_position(1));
 
         m_force.fill(0);
     }

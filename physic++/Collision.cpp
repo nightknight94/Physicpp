@@ -1,5 +1,6 @@
 #include "Collision.hpp"
 #include "Body.hpp"
+#include "Shape.hpp"
 
 namespace physic
 {
@@ -17,7 +18,7 @@ namespace physic
         : A(a)
         , B(b)
     {
-        const double minPossibleDist = B.m_shape.getRadius() + A.m_shape.getRadius();
+        const double minPossibleDist = B.shape.getDistanceToCenter() + A.shape.getDistanceToCenter();
         const auto distaceBetweenBodies = math::norm(B.m_position - A.m_position);
 
         depth = distaceBetweenBodies - minPossibleDist;

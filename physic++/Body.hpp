@@ -3,10 +3,11 @@
 #include "Mass.hpp"
 #include "Material.hpp"
 #include "Matrix.hpp"
-#include <SFML/Graphics.hpp>
 
 namespace physic
 {
+    class Shape;
+
     class Body
     {
       public:
@@ -17,21 +18,12 @@ namespace physic
         Mass m_mass{0};
         Material m_material{materials::Bouncy};
 
-        sf::CircleShape m_shape{10};
+        const Shape & shape;
 
-        Body();
+        Body(const Shape & s);
         void setMaterial(const Material &material);
 
         void update(double dt);
     };
-
-
-    // TODO:
-    // struct Shape
-    // {
-    //     // opis geometryczny
-    //     // bezwładność
-    //     // moment bezwładności
-    // };
 
 } // namespace physic

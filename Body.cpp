@@ -12,7 +12,7 @@ namespace physic
         double volume = 2 * 3.1415 * m_shape.getRadius(); // shape.getVolume()
 
         m_material = material;
-        m_mass = (m_material.m_density == 0) ? 100000.0 : (volume * m_material.m_density);
+        m_mass = Mass(volume*m_material.m_density); 
     }
 
     void Body::update(double dt)

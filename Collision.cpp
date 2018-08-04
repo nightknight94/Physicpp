@@ -48,18 +48,18 @@ namespace physic
         double e = std::min(A.m_material.m_restitution, B.m_material.m_restitution);
 
         double impulseSkalar = -(1 + e) * velocityNormal;
-        impulseSkalar /= (1 / A.m_mass + 1 / B.m_mass);
+        impulseSkalar /= (1.0 / A.m_mass + 1.0 / B.m_mass);
 
         auto impulse = collisionNormal * impulseSkalar;
 
-        A.m_velocity -= (impulse * (1 / A.m_mass));
-        B.m_velocity += (impulse * (1 / B.m_mass));
+        A.m_velocity -= (impulse * (1.0 / A.m_mass));
+        B.m_velocity += (impulse * (1.0 / B.m_mass));
     }
 
     void Collision::correctPosition()
     {
         double percent = 0.2;
-        math::Vector<2> correction = -depth * percent * collisionNormal / (1 / A.m_mass + 1 / B.m_mass);
+        math::Vector<2> correction = -depth * percent * collisionNormal / (1.0 / A.m_mass + 1.0 / B.m_mass);
         A.m_position -= correction / A.m_mass;
         B.m_position += correction / B.m_mass;
     }

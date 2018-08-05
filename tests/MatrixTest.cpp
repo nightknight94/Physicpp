@@ -3,10 +3,10 @@
 
 template <typename T, size_t N, size_t M>
 ::testing::AssertionResult ArraysMatch(const T (&expected)[N][M],
-                                       const math::Matrix<N, M> matrix);
+                                       const math::Matrix<N, M> &matrix);
 template <typename T, size_t N>
 ::testing::AssertionResult ArraysMatch(const T (&expected)[N],
-                                       const math::Matrix<N, 1> matrix);
+                                       const math::Matrix<N, 1> &matrix);
 
 TEST(MatrixTest, MatrixInitialization)
 {
@@ -120,7 +120,7 @@ TEST(MatrixTest, VectorSpecificFreeFunctions)
 
 template <typename T, size_t N, size_t M>
 ::testing::AssertionResult ArraysMatch(const T (&expected)[N][M],
-                                       const math::Matrix<N, M> matrix)
+                                       const math::Matrix<N, M> &matrix)
 {
     for(size_t i = 0; i < N; ++i)
     {
@@ -139,7 +139,7 @@ template <typename T, size_t N, size_t M>
 
 template <typename T, size_t N>
 ::testing::AssertionResult ArraysMatch(const T (&expected)[N],
-                                       const math::Vector<N> vector)
+                                       const math::Vector<N> &vector)
 {
     for(size_t i = 0; i < N; ++i)
     {

@@ -13,6 +13,9 @@ add_custom_target(full_test
 				   COMMAND valgrind ${CMAKE_BINARY_DIR}/gtests
 				   DEPENDS ${CMAKE_BINARY_DIR}/gtests)
 
+add_custom_target(cppcheck
+				   COMMAND cppcheck --enable=all -v -q ${CMAKE_SOURCE_DIR}/physic++/)
+
 # Build shared library
 set(physic_path ${CMAKE_SOURCE_DIR}/physic++)
 FILE(GLOB physic_src ${physic_path}/*.cpp)

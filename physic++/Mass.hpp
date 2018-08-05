@@ -15,7 +15,7 @@ namespace physic
         double massInv;
 
       public:
-        Mass(double t_mass)
+        explicit Mass(double t_mass)
             : mass(t_mass)
             , massInv((mass == 0) ? 0 : 1 / mass)
         {}

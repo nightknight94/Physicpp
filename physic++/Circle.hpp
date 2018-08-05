@@ -10,7 +10,7 @@ namespace physic
         double radius;
 
       public:
-        Circle(double r);
+        explicit Circle(double r);
         virtual ~Circle(){};
 
         virtual double getDistanceToCenter() const;

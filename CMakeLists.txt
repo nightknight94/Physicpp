@@ -4,17 +4,21 @@ project (Physic++)
 set(CMAKE_CXX_FLAGS "-Werror -Wall -Wextra -Wshadow -fprofile-arcs -ftest-coverage")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-add_custom_target(run_tests
-				   COMMAND ${CMAKE_BINARY_DIR}/gtests
-				   DEPENDS ${CMAKE_BINARY_DIR}/gtests)
+add_custom_target(tests
+				    COMMAND ${CMAKE_BINARY_DIR}/gtests
+				    DEPENDS ${CMAKE_BINARY_DIR}/gtests)
 
-add_custom_target(full_test
-				   COMMAND ${CMAKE_BINARY_DIR}/gtests
-				   COMMAND valgrind ${CMAKE_BINARY_DIR}/gtests
-				   DEPENDS ${CMAKE_BINARY_DIR}/gtests)
+add_custom_target(valgrind
+					COMMAND valgrind ${CMAKE_BINARY_DIR}/gtests
+					DEPENDS ${CMAKE_BINARY_DIR}/gtests)
 
 add_custom_target(cppcheck
-				   COMMAND cppcheck --enable=all -v -q ${CMAKE_SOURCE_DIR}/physic++/)
+				    COMMAND cppcheck --enable=all -v -q ${CMAKE_SOURCE_DIR}/physic++/)
+
+add_custom_target(full_test
+				    COMMAND make tests
+				    COMMAND make valgrind
+				    COMMAND make cppcheck)
 
 # Build shared library
 set(physic_path ${CMAKE_SOURCE_DIR}/physic++)

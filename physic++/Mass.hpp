@@ -6,10 +6,10 @@ namespace physic
     {
       private:
         template <typename T>
-        friend T operator*(const T &left, const Mass &right);
+        friend auto operator*(const T &left, const Mass &right);
 
         template <typename T>
-        friend T operator/(const T &left, const Mass &right);
+        friend auto operator/(const T &left, const Mass &right);
 
         double mass;
         double massInv;
@@ -22,13 +22,13 @@ namespace physic
     };
 
     template <typename T>
-    T operator*(const T &left, const Mass &right)
+    auto operator*(const T &left, const Mass &right)
     {
         return left * right.mass;
     }
 
     template <typename T>
-    T operator/(const T &left, const Mass &right)
+    auto operator/(const T &left, const Mass &right)
     {
         return left * right.massInv;
     }

@@ -14,12 +14,12 @@ namespace physic
 
     double Circle::getVolume() const
     {
-        return 2 * 3.1415 * (radius * radius);
+        return 2.0 * 3.1415 * (radius * radius);
     }
 
     double Circle::getMomentOfInertia(const Mass &mass) const
     {
-        return (1 / 2) * mass * (radius * radius);
+        return (1.0 / 2.0) * mass * (radius * radius);
     }
 
 } // namespace physic

@@ -7,6 +7,7 @@ set (gtest_path ${test_path}/googletest/googletest)
 add_subdirectory(${gtest_path} 
 				 EXCLUDE_FROM_ALL)
 
+include_directories (${physic_path})
 include_directories (${gtest_path}/include)
 
 # Create test executable

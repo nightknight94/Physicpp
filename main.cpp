@@ -8,8 +8,6 @@
 
 #include <iostream>
 
-
-// TODO: Check test coverage
 // TODO: Make sure everywhere SI is used
 // TODO: Converter between SI and pixels
 int main()

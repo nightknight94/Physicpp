@@ -1,39 +1,31 @@
 cmake_minimum_required (VERSION 3.0)
 
-project (Physic++)
 set(CMAKE_CXX_FLAGS "-Werror -Wall -Wextra -Wshadow -fprofile-arcs -ftest-coverage")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-add_custom_target(tests
-				    COMMAND ${CMAKE_BINARY_DIR}/gtests
-				    DEPENDS ${CMAKE_BINARY_DIR}/gtests)
+include(CTest)
 
-add_custom_target(valgrind
-					COMMAND valgrind ${CMAKE_BINARY_DIR}/gtests
-					DEPENDS ${CMAKE_BINARY_DIR}/gtests)
-
-add_custom_target(cppcheck
-				    COMMAND cppcheck --enable=all -v -q ${CMAKE_SOURCE_DIR}/physic++/)
+add_test(NAME tests
+		 COMMAND ${CMAKE_BINARY_DIR}/gtests --gtest_color=yes)
 
 add_custom_target(full_test
-				    COMMAND make tests
-				    COMMAND make valgrind
-				    COMMAND make cppcheck)
+				  COMMAND ctest -T Test
+				  COMMAND ctest -T MemCheck
+				  COMMAND ctest -T Coverage)
 
-# Build shared library
+# Add submodules
 set(physic_path ${CMAKE_SOURCE_DIR}/physic++)
-FILE(GLOB physic_src ${physic_path}/*.cpp)
-add_library(physic++ SHARED ${physic_src})
-
-# Add the ‘include’ directory 
-include_directories (${physic_path})
-
-# Build tests
 set(test_path ${CMAKE_SOURCE_DIR}/tests)
+
 add_subdirectory(${test_path})
+add_subdirectory(${physic_path})
 
 # Build playground
 set(sfml sfml-graphics sfml-window sfml-system)
+
+# For convenience
+include_directories (${physic_path}) 
 
 add_executable(example main.cpp)
 target_link_libraries(example physic++ ${sfml})

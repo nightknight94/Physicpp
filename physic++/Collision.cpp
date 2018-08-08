@@ -17,7 +17,13 @@ namespace physic
     Collision::Collision(Body &a, Body &b)
         : A(a)
         , B(b)
-    {
+    { 
+        // Don't resolve if a and b points to the same object
+        if(&a == &b)
+        {
+            return;
+        }
+
         const double minPossibleDist = B.shape.getDistanceToCenter() + A.shape.getDistanceToCenter();
         const auto distaceBetweenBodies = math::norm(B.m_position - A.m_position);
 

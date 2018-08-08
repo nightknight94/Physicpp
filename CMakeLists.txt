@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.10)
 
 set(CMAKE_CXX_FLAGS "-Werror -Wall -Wextra -Wshadow -fprofile-arcs -ftest-coverage")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -10,7 +10,7 @@ add_test(NAME tests
 		 COMMAND ${CMAKE_BINARY_DIR}/gtests --gtest_color=yes)
 
 add_custom_target(full_test
-				  COMMAND ctest -T Test
+				  COMMAND ctest -V -T Test
 				  COMMAND ctest -T MemCheck
 				  COMMAND ctest -T Coverage)
 

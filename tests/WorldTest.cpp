@@ -1,18 +1,18 @@
-#include <gtest/gtest.h>
+// Copyright 2018
+
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
-#include "World.hpp"
 #include "IBodyMock.hpp"
+#include "World.hpp"
 
-namespace physic
-{
-    TEST(WorldTest, WorldBasicTest)
-    {
-        IBodyMock ibodyMock;
-        World world;
+namespace physic {
+TEST(WorldTest, WorldBasicTest) {
+  IBodyMock ibodyMock;
+  World world;
 
-        world.addObject(ibodyMock);
-        world.setGravity(math::Vector<2>({0, 0}));
-        world.update(0.01);
-    }
-} // namespace physic
+  world.addObject(ibodyMock);
+  world.setGravity(math::Vector<2>({0, 0}));
+  world.update(0.01);
+}
+}  // namespace physic

@@ -1,27 +1,27 @@
+// Copyright 2018
+
 #pragma once
 
 #include "Matrix.hpp"
 
 #include <vector>
 
-namespace physic
-{
-    class IBody;
+namespace physic {
+class IBody;
 
-    class World
-    {
-      private:
-        std::vector<IBody*> bodies;
-        math::Vector<2> gravity;
+class World {
+ private:
+  std::vector<IBody *> bodies;
+  math::Vector<2> gravity;
 
-        void resolveCollisions();
+  void resolveCollisions();
 
-      public:
-        void setGravity(const math::Vector<2> &i_gravity);
+ public:
+  void setGravity(const math::Vector<2> &i_gravity);
 
-        void addObject(IBody &i_body);
+  void addObject(IBody &i_body);
 
-        void update(double dt);
-    };
+  void update(double dt);
+};
 
-} // namespace physic
+}  // namespace physic

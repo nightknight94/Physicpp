@@ -1,18 +1,18 @@
+// Copyright 2018
+
 #pragma once
 
 #include "IBody.hpp"
 
-namespace physic
-{
-    class Shape;
+namespace physic {
+class Shape;
 
-    class Body : public IBody
-    {
-      public:
-        void setMaterial(const Material &m) override;
-        void setShape(const Shape &s) override;
+class Body : public IBody {
+ public:
+  void setMaterial(const Material &m) override;
+  void setShape(const Shape &s) override;
 
-        void update(double dt) override;
-    };
+  void update(double dt) override;
+};
 
-} // namespace physic
+}  // namespace physic

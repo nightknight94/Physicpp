@@ -1,3 +1,5 @@
+// Copyright 2018
+
 #pragma once
 
 #include <gmock/gmock.h>
@@ -6,13 +8,11 @@
 #include "Material.hpp"
 #include "Shape.hpp"
 
-namespace physic
-{
-    class IBodyMock : public IBody
-    {
-      public:
-        MOCK_METHOD1(setMaterial, void(const Material &));
-        MOCK_METHOD1(setShape, void(const Shape &));
-        MOCK_METHOD1(update, void(double));
-    };
-} // namespace physic
+namespace physic {
+class IBodyMock : public IBody {
+ public:
+  MOCK_METHOD1(setMaterial, void(const Material &));
+  MOCK_METHOD1(setShape, void(const Shape &));
+  MOCK_METHOD1(update, void(double));
+};
+}  // namespace physic

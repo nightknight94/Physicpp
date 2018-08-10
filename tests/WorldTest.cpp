@@ -15,5 +15,4 @@ namespace physic
         world.setGravity(math::Vector<2>({0, 0}));
         world.update(0.01);
     }
-
 } // namespace physic

@@ -8,17 +8,18 @@ namespace physic
 {
     class Object;
 
-    // TODO: Add unit tests
     class World
     {
       private:
         std::vector<Object*> objects;
         math::Vector<2> gravity;
 
-      public:
-        void setGravity(math::Vector<2> g);
+        void resolveCollisions();
 
-        void addObject(Object &o);
+      public:
+        void setGravity(const math::Vector<2> &i_gravity);
+
+        void addObject(Object &i_object);
 
         void update(double dt);
     };

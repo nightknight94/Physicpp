@@ -7,11 +7,9 @@
 
 namespace physic {
 
-void World::setGravity(const math::Vector<2> &i_gravity) {
-  gravity = i_gravity;
+void World::setUpdateRate(double i_rate) {
+  updateTimePeriod = (i_rate == 0) ? 0 : 1 / i_rate;
 }
-
-void World::addObject(IBody &i_body) { bodies.push_back(&i_body); }
 
 void World::resolveCollisions() {
   for (auto &body1 : bodies) {
@@ -22,12 +20,18 @@ void World::resolveCollisions() {
 }
 
 void World::update(double dt) {
+  updateTimer += dt;
+  if (updateTimer < updateTimePeriod) {
+    return;
+  }
+
   resolveCollisions();
 
-  for (auto &object : bodies) {
-    object->force += (gravity * object->mass);
-    object->update(dt);
+  for (auto &body : bodies) {
+    body->force += (gravity * body->mass);
+    body->update(updateTimer);
   }
+  updateTimer = 0;
 }
 
 }  // namespace physic

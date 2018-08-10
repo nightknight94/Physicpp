@@ -17,7 +17,9 @@ int main() {
   w.setGravity(math::Vector<2>({0.0, 9.81}));
 
   sf::RenderWindow window(sf::VideoMode(800, 600), "");
-  window.setFramerateLimit(100);
+
+  constexpr double framerate = 100;
+  window.setFramerateLimit(framerate);
 
   physic::Circle c1(10);
   physic::Circle c2(10);
@@ -47,7 +49,7 @@ int main() {
 
     window.clear();
 
-    w.update(0.01);
+    w.update(1 / framerate);
 
     sf::CircleShape circ1(10);
     sf::CircleShape circ2(10);

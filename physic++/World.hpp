@@ -14,12 +14,15 @@ class World {
   std::vector<IBody *> bodies;
   math::Vector<2> gravity;
 
+  double updateTimePeriod{};
+  double updateTimer{0.01};
+
   void resolveCollisions();
 
  public:
-  void setGravity(const math::Vector<2> &i_gravity);
-
-  void addObject(IBody &i_body);
+  void setGravity(const math::Vector<2> &i_gravity) { gravity = i_gravity; }
+  void setUpdateRate(double i_rate);
+  void addObject(IBody &i_body) { bodies.push_back(&i_body); }
 
   void update(double dt);
 };

@@ -8,7 +8,6 @@ namespace physic
     class Shape;
     class Material;
 
-    // TODO: Add mock
     class Object
     {
       public:

@@ -14,16 +14,13 @@ namespace physic
     {
         material = &m;
 
-        double volume = shape->getVolume();
+        const double volume = shape->getVolume();
         mass = Mass(volume * material->m_density);
     }
 
     void Body::update(double dt)
     {
-        velocity += (force / mass) * dt;
-        position += velocity * dt;
-
-        force.fill(0);
+        resolvePhysics(dt);
     }
 
 } // namespace physic

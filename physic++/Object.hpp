@@ -20,6 +20,8 @@ namespace physic
         const Material *material{nullptr};
         const Shape *shape{nullptr};
 
+        virtual void resolvePhysics(double dt);
+
       public:
         virtual ~Object() = default;
 

@@ -7,10 +7,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 include(CTest)
 
 add_test(NAME tests
-		 COMMAND ${CMAKE_BINARY_DIR}/gtests --gtest_color=yes)
+		 COMMAND ${CMAKE_BINARY_DIR}/gtests --gtest_color=yes
+		 DEPENDS gtests)
 
 add_custom_target(full_test
-				  COMMAND ctest -V -T Test
+				  COMMAND ctest -T Build				  
+			      COMMAND ctest -V -T Test
 				  COMMAND ctest -T MemCheck
 				  COMMAND ctest -T Coverage)
 

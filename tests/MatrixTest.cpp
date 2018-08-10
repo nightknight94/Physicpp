@@ -10,13 +10,13 @@ template <typename T, size_t N>
 
 TEST(MatrixTest, MatrixInitialization)
 {
-    const int numberOfElements = 5;
+    const unsigned numberOfElements = 5;
     math::Vector<numberOfElements> a;
     EXPECT_EQ(numberOfElements, a.rowSize());
-    EXPECT_EQ(1, a.colSize());
+    EXPECT_EQ((unsigned)1, a.colSize());
 
-    const int row = 5;
-    const int col = 10;
+    const unsigned row = 5;
+    const unsigned col = 10;
     math::Matrix<row, col> b;
     EXPECT_EQ(row, b.rowSize());
     EXPECT_EQ(col, b.colSize());

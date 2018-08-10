@@ -6,12 +6,12 @@
 
 namespace physic
 {
-    class Object;
+    class IBody;
 
     class World
     {
       private:
-        std::vector<Object*> objects;
+        std::vector<IBody*> bodies;
         math::Vector<2> gravity;
 
         void resolveCollisions();
@@ -19,7 +19,7 @@ namespace physic
       public:
         void setGravity(const math::Vector<2> &i_gravity);
 
-        void addObject(Object &i_object);
+        void addObject(IBody &i_body);
 
         void update(double dt);
     };

@@ -4,13 +4,13 @@
 
 namespace physic
 {
-    class Object;
+    class IBody;
 
     class Collision
     {
       private:
-        Object &A;
-        Object &B;
+        IBody &A;
+        IBody &B;
         math::Vector<2> collisionNormal;
         double depth;
         math::Vector<2> relativeVelocity;
@@ -20,7 +20,7 @@ namespace physic
         void resolve();
         void correctPosition();
       public:
-        Collision(Object &a, Object &b);
+        Collision(IBody &a, IBody &b);
     };
 
 } // namespace physic

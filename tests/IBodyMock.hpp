@@ -1,14 +1,14 @@
 #pragma once
 
 #include <gmock/gmock.h>
-#include "Object.hpp"
+#include "IBody.hpp"
 
 #include "Material.hpp"
 #include "Shape.hpp"
 
 namespace physic
 {
-    class ObjectMock : public Object
+    class IBodyMock : public IBody
     {
       public:
         MOCK_METHOD1(setMaterial, void(const Material &));

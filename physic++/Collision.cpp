@@ -1,22 +1,22 @@
 #include "Collision.hpp"
 
 #include "Material.hpp"
-#include "Object.hpp"
+#include "IBody.hpp"
 #include "Shape.hpp"
 
 namespace physic
 {
     struct CollisionInfo
     {
-        physic::Object &A;
-        physic::Object &B;
+        physic::IBody &A;
+        physic::IBody &B;
         const math::Vector<2> collisionNormal;
         const double depth;
         const math::Vector<2> relativeVelocity;
         const double velocityNormal;
     };
 
-    Collision::Collision(Object &a, Object &b)
+    Collision::Collision(IBody &a, IBody &b)
         : A(a)
         , B(b)
     {

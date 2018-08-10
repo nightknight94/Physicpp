@@ -1,8 +1,8 @@
-#include "Object.hpp"
+#include "IBody.hpp"
 
 namespace physic
 {
-    void Object::resolvePhysics(double dt)
+    void IBody::resolvePhysics(double dt)
     {
         velocity += (force / mass) * dt;
         position += velocity * dt;

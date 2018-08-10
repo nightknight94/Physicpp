@@ -1,7 +1,7 @@
 #include "World.hpp"
 
 #include "Collision.hpp"
-#include "Object.hpp"
+#include "IBody.hpp"
 
 namespace physic
 {
@@ -10,18 +10,18 @@ namespace physic
         gravity = i_gravity;
     }
 
-    void World::addObject(Object &i_object)
+    void World::addObject(IBody &i_body)
     {
-        objects.push_back(&i_object);
+        bodies.push_back(&i_body);
     }
 
     void World::resolveCollisions()
     {
-        for(auto &object1 : objects)
+        for(auto &body1 : bodies)
         {
-            for(auto &object2 : objects)
+            for(auto &body2 : bodies)
             {
-                physic::Collision((*object1), (*object2));
+                physic::Collision((*body1), (*body2));
             }
         }
     }
@@ -30,7 +30,7 @@ namespace physic
     {
         resolveCollisions();
 
-        for(auto &object : objects)
+        for(auto &object : bodies)
         {
             object->force += (gravity * object->mass);
             object->update(dt);

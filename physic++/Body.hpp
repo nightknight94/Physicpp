@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Object.hpp"
+#include "IBody.hpp"
 
 namespace physic
 {
     class Shape;
 
-    class Body : public Object
+    class Body : public IBody
     {
       public:
         void setMaterial(const Material &m) override;

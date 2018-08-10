@@ -8,7 +8,7 @@ namespace physic
     class Shape;
     class Material;
 
-    class Object
+    class IBody
     {
       public:
         math::Vector<2> position{};
@@ -22,7 +22,7 @@ namespace physic
         virtual void resolvePhysics(double dt);
 
       public:
-        virtual ~Object() = default;
+        virtual ~IBody() = default;
 
         virtual void setMaterial(const Material &m) = 0;
         virtual void setShape(const Shape &s) = 0;

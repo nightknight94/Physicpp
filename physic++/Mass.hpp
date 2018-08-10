@@ -11,10 +11,11 @@ namespace physic
         template <typename T>
         friend auto operator/(const T &left, const Mass &right);
 
-        double mass;
-        double massInv;
+        double mass{};
+        double massInv{};
 
       public:
+        Mass() = default;
         explicit Mass(double t_mass)
             : mass(t_mass)
             , massInv((mass == 0) ? 0 : 1 / mass)

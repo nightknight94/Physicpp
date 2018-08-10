@@ -16,7 +16,7 @@ namespace physic
         math::Vector<2> velocity{};
         math::Vector<2> force{};
 
-        Mass mass{0};
+        Mass mass{};
         const Material *material{nullptr};
         const Shape *shape{nullptr};
 

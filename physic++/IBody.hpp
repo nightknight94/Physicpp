@@ -6,7 +6,7 @@
 #include "Matrix.hpp"
 
 namespace physic {
-class Shape;
+class IShape;
 class Material;
 
 class IBody {
@@ -17,7 +17,7 @@ class IBody {
 
   Mass mass{};
   const Material *material{nullptr};
-  const Shape *shape{nullptr};
+  const IShape *shape{nullptr};
 
   virtual void resolvePhysics(double dt);
 
@@ -25,7 +25,7 @@ class IBody {
   virtual ~IBody() = default;
 
   virtual void setMaterial(const Material &m) = 0;
-  virtual void setShape(const Shape &s) = 0;
+  virtual void setShape(const IShape &s) = 0;
 
   virtual void update(double dt) = 0;
 };

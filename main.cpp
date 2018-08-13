@@ -1,6 +1,8 @@
 // Copyright 2018
 
 #include <iostream>
+#include <vector>
+
 #include "Body.hpp"
 #include "Circle.hpp"
 #include "Material.hpp"
@@ -20,23 +22,28 @@ int main() {
 
   constexpr double framerate = 100;
   window.setFramerateLimit(framerate);
+  w.setUpdateRate(framerate);
 
-  physic::Circle c1(10);
-  physic::Circle c2(10);
+  std::vector<physic::Circle> circles{
+      physic::Circle(10),
+      physic::Circle(10),
+      physic::Circle(20),
+  };
 
-  physic::Body b1;
-  physic::Body b2;
+  std::vector<physic::Body> bodies(circles.size());
 
-  w.addObject(b1);
-  w.addObject(b2);
+  for (size_t i = 0; i < bodies.size(); ++i) {
+    bodies[i].setShape(circles[i]);
+    w.addObject(bodies[i]);
+  }
 
-  b1.position = math::Vector<2>({400, 0});
-  b2.position = math::Vector<2>({400, 200});
+  bodies[0].position = math::Vector<2>({400, 0});
+  bodies[1].position = math::Vector<2>({400, 200});
+  bodies[2].velocity = math::Vector<2>({70, 0});
 
-  b1.setShape(c1);
-  b2.setShape(c2);
-  b1.setMaterial(materials::Bouncy);
-  b2.setMaterial(materials::Static);
+  bodies[0].setMaterial(materials::Bouncy);
+  bodies[1].setMaterial(materials::Static);
+  bodies[2].setMaterial(materials::SuperBouncy);
 
   while (window.isOpen()) {
     sf::Event event;
@@ -51,13 +58,16 @@ int main() {
 
     w.update(1 / framerate);
 
-    sf::CircleShape circ1(10);
-    sf::CircleShape circ2(10);
-    circ1.setPosition(b1.position(0), b1.position(1));
-    circ2.setPosition(b2.position(0), b2.position(1));
+    std::vector<sf::CircleShape> drawCircles{
+        sf::CircleShape(10),
+        sf::CircleShape(10),
+        sf::CircleShape(20),
+    };
 
-    window.draw(circ1);
-    window.draw(circ2);
+    for (size_t i = 0; i < circles.size(); ++i) {
+      drawCircles[i].setPosition(bodies[i].position(0), bodies[i].position(1));
+      window.draw(drawCircles[i]);
+    }
 
     window.display();
   }

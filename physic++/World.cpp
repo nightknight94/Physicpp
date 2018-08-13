@@ -8,7 +8,7 @@
 namespace physic {
 
 void World::setUpdateRate(double i_rate) {
-  updateTimePeriod = (i_rate == 0) ? 0 : 1 / i_rate;
+  updateRateInv = (i_rate == 0) ? 0 : 1 / i_rate;
 }
 
 void World::resolveCollisions() {
@@ -21,7 +21,7 @@ void World::resolveCollisions() {
 
 void World::update(double dt) {
   updateTimer += dt;
-  if (updateTimer < updateTimePeriod) {
+  if (updateTimer < updateRateInv) {
     return;
   }
 

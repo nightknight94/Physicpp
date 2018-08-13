@@ -3,15 +3,15 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "IBodyMock.hpp"
+#include "Body.hpp"
 #include "World.hpp"
 
 namespace physic {
 TEST(WorldTest, WorldBasicTest) {
-  IBodyMock ibodyMock;
   World world;
+  Body body;
 
-  world.addObject(ibodyMock);
+  world.addObject(body);
   world.setGravity(math::Vector<2>({0, 0}));
   world.update(0.01);
 }

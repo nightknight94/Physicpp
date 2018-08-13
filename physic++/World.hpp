@@ -14,8 +14,8 @@ class World {
   std::vector<IBody *> bodies;
   math::Vector<2> gravity;
 
-  double updateTimePeriod{};
-  double updateTimer{0.01};
+  double updateRateInv{};
+  double updateTimer{};
 
   void resolveCollisions();
 

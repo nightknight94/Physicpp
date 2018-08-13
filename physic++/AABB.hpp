@@ -3,14 +3,16 @@
 #pragma once
 
 #include "IShape.hpp"
+#include "Matrix.hpp"
 
 namespace physic {
-class Circle : public IShape {
+class AABB : public IShape {
  private:
-  double radius;
+  math::Vector<2> minPoint;
+  math::Vector<2> maxPoint;
 
  public:
-  explicit Circle(double r);
+  explicit AABB(math::Vector<2> i_minPoint, math::Vector<2> i_maxPoint);
 
   virtual double getDistanceToCenter() const;
   virtual double getVolume() const;

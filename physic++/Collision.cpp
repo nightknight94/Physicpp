@@ -4,8 +4,8 @@
 #include <algorithm>
 
 #include "IBody.hpp"
+#include "IShape.hpp"
 #include "Material.hpp"
-#include "Shape.hpp"
 
 namespace physic {
 struct CollisionInfo {
@@ -18,7 +18,7 @@ struct CollisionInfo {
 };
 
 Collision::Collision(IBody &a, IBody &b) : A(a), B(b) {
-  // Don't resolve if a and b points to the same object
+  // Don't resolve if a and b points to the same body
   if (&a == &b) {
     return;
   }

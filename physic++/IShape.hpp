@@ -5,9 +5,9 @@
 namespace physic {
 class Mass;
 
-class Shape {
+class IShape {
  public:
-  virtual ~Shape(){};
+  virtual ~IShape() = default;
 
   virtual double getDistanceToCenter() const = 0;
   virtual double getVolume() const = 0;

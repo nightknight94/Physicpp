@@ -5,12 +5,12 @@
 #include "IBody.hpp"
 
 namespace physic {
-class Shape;
+class IShape;
 
 class Body : public IBody {
  public:
   void setMaterial(const Material &m) override;
-  void setShape(const Shape &s) override;
+  void setShape(const IShape &s) override;
 
   void update(double dt) override;
 };

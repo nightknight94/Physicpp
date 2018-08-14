@@ -1,15 +1,16 @@
-// Copyright 2018
-
 #pragma once
 
-namespace physic {
-struct Material {
-  double m_density{};
-  double m_restitution{};
+namespace physic
+{
+struct Material
+{
+    double m_density{};
+    double m_restitution{};
 };
-}  // namespace physic
+} // namespace physic
 
-namespace materials {
+namespace materials
+{
 constexpr physic::Material Rock{
     .m_density = 0.6,
     .m_restitution = 0.1,
@@ -44,4 +45,4 @@ constexpr physic::Material Static{
     .m_density = 0.0,
     .m_restitution = 0.4,
 };
-}  // namespace materials
+} // namespace materials

@@ -1,18 +1,18 @@
-// Copyright 2018
-
 #pragma once
 
-namespace physic {
+namespace physic
+{
 class Mass;
 
-class IShape {
- public:
-  virtual ~IShape() = default;
+class IShape
+{
+  public:
+    virtual ~IShape() = default;
 
-  virtual double getDistanceToCenter() const = 0;
-  virtual double getVolume() const = 0;
+    virtual double getDistanceToCenter() const = 0;
+    virtual double getVolume() const = 0;
 
-  virtual double getMomentOfInertia(const Mass &mass) const = 0;
+    virtual double getMomentOfInertia(const Mass &mass) const = 0;
 };
 
-}  // namespace physic
+} // namespace physic

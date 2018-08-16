@@ -4,13 +4,13 @@
 
 namespace physic
 {
-class IBody;
+class Particle;
 
 class CollisionSolver
 {
   private:
-    IBody *A{nullptr};
-    IBody *B{nullptr};
+    Particle *A{nullptr};
+    Particle *B{nullptr};
     math::Vector<2> collisionNormal{};
     double depth{};
     math::Vector<2> relativeVelocity{};
@@ -22,7 +22,7 @@ class CollisionSolver
 
   public:
     CollisionSolver() = default;
-    void operator()(IBody &a, IBody &b);
+    void operator()(Particle &a, Particle &b);
 };
 
 } // namespace physic

@@ -2,13 +2,15 @@
 #include <vector>
 
 #include "Body.hpp"
-#include "Circle.hpp"
 #include "Material.hpp"
 #include "Matrix.hpp"
+#include "Particle.hpp"
 #include "World.hpp"
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+
+#include <random>
 
 // TODO: Make sure everywhere SI is used
 // TODO: Converter between SI and pixels
@@ -20,33 +22,26 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "");
 
     constexpr double framerate = 100;
-    window.setFramerateLimit(framerate);
     w.setUpdateRate(framerate);
 
-    std::vector<physic::Circle> circles{
-        physic::Circle(10),
-        physic::Circle(10),
-        physic::Circle(20),
-    };
+    std::vector<physic::Particle> Particles;
 
-    std::vector<physic::Body> bodies(circles.size());
-
-    for(size_t i = 0; i < bodies.size(); ++i)
+    for(size_t i = 0; i < 200; ++i)
     {
-        bodies[i].setShape(circles[i]);
-        w.addObject(bodies[i]);
+        Particles.push_back(physic::Particle(10, materials::Bouncy));
+        Particles[i].position = math::Vector<2>({std::rand() % 800, std::rand() % 600});
+        Particles[i].velocity += math::Vector<2>({0, -std::rand() % 80});
     }
 
-    bodies[0].position = math::Vector<2>({400, 0});
-    bodies[1].position = math::Vector<2>({400, 200});
-    bodies[2].velocity = math::Vector<2>({70, 0});
+    w.addParticles(Particles);
 
-    bodies[0].setMaterial(materials::Bouncy);
-    bodies[1].setMaterial(materials::Static);
-    bodies[2].setMaterial(materials::SuperBouncy);
-
+    sf::Clock clock;
     while(window.isOpen())
     {
+        sf::Time elapsedTime = clock.restart();
+        float dt = elapsedTime.asSeconds();
+        std::cout << "FPS: " << std::round(1 / dt) << "\n";
+
         sf::Event event;
         while(window.pollEvent(event))
         {
@@ -59,18 +54,14 @@ int main()
 
         window.clear();
 
-        w.update(1 / framerate);
+        w.update(dt);
 
-        std::vector<sf::CircleShape> drawCircles{
-            sf::CircleShape(10),
-            sf::CircleShape(10),
-            sf::CircleShape(20),
-        };
-
-        for(size_t i = 0; i < circles.size(); ++i)
+        for(size_t i = 0; i < Particles.size(); ++i)
         {
-            drawCircles[i].setPosition(bodies[i].position(0), bodies[i].position(1));
-            window.draw(drawCircles[i]);
+            sf::CircleShape c;
+            c.setRadius(Particles[i].getRadius());
+            c.setPosition(Particles[i].position(0), Particles[i].position(1));
+            window.draw(c);
         }
 
         window.display();

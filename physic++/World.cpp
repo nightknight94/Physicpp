@@ -2,9 +2,19 @@
 
 #include "CollisionSolver.hpp"
 #include "IBody.hpp"
+#include "Particle.hpp"
 
 namespace physic
 {
+
+void World::addParticles(std::vector<Particle> &i_particles)
+{
+    for(auto &p : i_particles)
+    {
+        particles.push_back(&p);
+    }
+}
+
 
 void World::setUpdateRate(double i_rate)
 {
@@ -13,11 +23,11 @@ void World::setUpdateRate(double i_rate)
 
 void World::resolveCollisions()
 {
-    for(auto &body1 : bodies)
+    for(auto &particle1 : particles)
     {
-        for(auto &body2 : bodies)
+        for(auto &particle2 : particles)
         {
-            collisionSolver((*body1), (*body2));
+            collisionSolver((*particle1), (*particle2));
         }
     }
 }
@@ -32,10 +42,10 @@ void World::update(double dt)
 
     resolveCollisions();
 
-    for(auto &body : bodies)
+    for(auto &particle : particles)
     {
-        body->force += (gravity * body->mass);
-        body->update(updateTimer);
+        particle->force += (gravity * particle->mass);
+        particle->update(updateTimer);
     }
     updateTimer = 0;
 }

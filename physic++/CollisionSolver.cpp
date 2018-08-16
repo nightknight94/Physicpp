@@ -2,23 +2,23 @@
 
 #include <algorithm>
 
-#include "IBody.hpp"
 #include "IShape.hpp"
 #include "Material.hpp"
+#include "Particle.hpp"
 
 namespace physic
 {
 struct CollisionInfo
 {
-    physic::IBody &A;
-    physic::IBody &B;
+    physic::Particle &A;
+    physic::Particle &B;
     const math::Vector<2> collisionNormal;
     const double depth;
     const math::Vector<2> relativeVelocity;
     const double velocityNormal;
 };
 
-void CollisionSolver::operator()(IBody &a, IBody &b)
+void CollisionSolver::operator()(Particle &a, Particle &b)
 {
     A = &a;
     B = &b;
@@ -30,7 +30,7 @@ void CollisionSolver::operator()(IBody &a, IBody &b)
     }
 
     const double minPossibleDist =
-        B->shape->getDistanceToCenter() + A->shape->getDistanceToCenter();
+        B->getRadius() + A->getRadius();
     const auto distaceBetweenBodies = math::norm(B->position - A->position);
 
     depth = distaceBetweenBodies - minPossibleDist;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CollisionSolver.hpp"
 #include "Matrix.hpp"
 
 #include <vector>
@@ -17,6 +18,7 @@ class World
     double updateRateInv{};
     double updateTimer{};
 
+    CollisionSolver collisionSolver;
     void resolveCollisions();
 
   public:

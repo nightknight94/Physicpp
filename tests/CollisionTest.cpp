@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Collision.hpp"
+#include "CollisionSolver.hpp"
 
 #include "mocks/IShapeMock.hpp"
 
@@ -8,21 +8,24 @@
 
 namespace physic
 {
-TEST(CollisionTest, CollisionBasicTest)
+TEST(CollisionSolverTest, CollisionSolverBasicTest)
 {
     IShapeMock s1;
     IShapeMock s2;
 
-    ON_CALL(s1, getDistanceToCenter()).WillByDefault(testing::Return(10));
-    ON_CALL(s1, getDistanceToCenter()).WillByDefault(testing::Return(20));
-
     Body b1;
     Body b2;
+
+    EXPECT_CALL(s1, getDistanceToCenter())
+        .WillRepeatedly(testing::Return(10));
+    EXPECT_CALL(s2, getDistanceToCenter())
+        .WillRepeatedly(testing::Return(20));
 
     b1.setShape(s1);
     b2.setShape(s2);
 
-    Collision(b1, b2);
+    CollisionSolver collisionSolver;
+    collisionSolver(b1, b2);
 }
 
 } // namespace physic

@@ -1,4 +1,4 @@
-#include "Collision.hpp"
+#include "CollisionSolver.hpp"
 
 #include <algorithm>
 
@@ -18,10 +18,11 @@ struct CollisionInfo
     const double velocityNormal;
 };
 
-Collision::Collision(IBody &a, IBody &b)
-    : A(a)
-    , B(b)
+void CollisionSolver::operator()(IBody &a, IBody &b)
 {
+    A = &a;
+    B = &b;
+
     // Don't resolve if a and b points to the same body
     if(&a == &b)
     {
@@ -29,13 +30,13 @@ Collision::Collision(IBody &a, IBody &b)
     }
 
     const double minPossibleDist =
-        B.shape->getDistanceToCenter() + A.shape->getDistanceToCenter();
-    const auto distaceBetweenBodies = math::norm(B.position - A.position);
+        B->shape->getDistanceToCenter() + A->shape->getDistanceToCenter();
+    const auto distaceBetweenBodies = math::norm(B->position - A->position);
 
     depth = distaceBetweenBodies - minPossibleDist;
-    collisionNormal = (B.position - A.position) / distaceBetweenBodies;
+    collisionNormal = (B->position - A->position) / distaceBetweenBodies;
 
-    relativeVelocity = B.velocity - A.velocity;
+    relativeVelocity = B->velocity - A->velocity;
     velocityNormal = math::dotProduct(relativeVelocity, collisionNormal);
 
     // Break if bodies don't collide
@@ -50,28 +51,27 @@ Collision::Collision(IBody &a, IBody &b)
     }
 }
 
-bool Collision::detected() { return depth < 0; }
+bool CollisionSolver::detected() { return depth < 0; }
 
-void Collision::resolve()
+void CollisionSolver::resolve()
 {
-    double e = std::min(A.material->m_restitution, B.material->m_restitution);
+    double e = std::min(A->material->m_restitution, B->material->m_restitution);
 
     double impulseSkalar = -(1 + e) * velocityNormal;
-    impulseSkalar /= (1 / A.mass + 1 / B.mass);
+    impulseSkalar /= (1 / A->mass + 1 / B->mass);
 
     auto impulse = collisionNormal * impulseSkalar;
 
-    A.velocity -= (impulse * (1 / A.mass));
-    B.velocity += (impulse * (1 / B.mass));
+    A->velocity -= (impulse * (1 / A->mass));
+    B->velocity += (impulse * (1 / B->mass));
 }
 
-void Collision::correctPosition()
+void CollisionSolver::correctPosition()
 {
     double percent = 0.2;
-    math::Vector<2> correction =
-        -depth * percent * collisionNormal / (1 / A.mass + 1 / B.mass);
-    A.position -= correction / A.mass;
-    B.position += correction / B.mass;
+    math::Vector<2> correction = -depth * percent * collisionNormal / (1 / A->mass + 1 / B->mass);
+    A->position -= correction / A->mass;
+    B->position += correction / B->mass;
 }
 
 } // namespace physic

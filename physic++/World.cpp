@@ -1,6 +1,6 @@
 #include "World.hpp"
 
-#include "Collision.hpp"
+#include "CollisionSolver.hpp"
 #include "IBody.hpp"
 
 namespace physic
@@ -17,7 +17,7 @@ void World::resolveCollisions()
     {
         for(auto &body2 : bodies)
         {
-            physic::Collision((*body1), (*body2));
+            collisionSolver((*body1), (*body2));
         }
     }
 }

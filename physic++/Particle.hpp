@@ -1,35 +1,21 @@
 #pragma once
 
-#include "Mass.hpp"
-#include "Matrix.hpp"
+#include "Movable.hpp"
+#include "Touchable.hpp"
 
 namespace physic
 {
-class IShape;
 class Material;
 
-class Particle
+class Particle final : public Movable, public Touchable
 {
-  public:
-    double radius;
-
-    math::Vector<2> position{};
-    math::Vector<2> velocity{};
+  protected:
     math::Vector<2> force{};
 
-    Mass mass{};
-    const Material *material{nullptr};
-
-    virtual void resolvePhysics(double dt);
-
   public:
-    Particle(double i_radius, const Material &i_material);
+    Particle() = default;
 
-    virtual double getRadius() const;
-    virtual double getVolume() const;
-
-    virtual void setMaterial(const Material &m);
-
-    virtual void update(double dt);
+    void addForce(const math::Vector<2> &i_force) { force += i_force; };
+    void update(double dt);
 };
 } // namespace physic

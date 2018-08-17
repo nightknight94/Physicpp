@@ -1,7 +1,5 @@
 #include "World.hpp"
 
-#include "CollisionSolver.hpp"
-#include "IBody.hpp"
 #include "Particle.hpp"
 
 namespace physic
@@ -44,9 +42,10 @@ void World::update(double dt)
 
     for(auto &particle : particles)
     {
-        particle->force += (gravity * particle->mass);
+        particle->addForce(gravity * particle->getMass());
         particle->update(updateTimer);
     }
+    std::cout << 1 / updateTimer << "\n";
     updateTimer = 0;
 }
 

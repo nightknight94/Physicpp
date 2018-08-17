@@ -1,9 +1,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Body.hpp"
-#include "Material.hpp"
-#include "Matrix.hpp"
 #include "Particle.hpp"
 #include "World.hpp"
 
@@ -16,6 +13,7 @@
 // TODO: Converter between SI and pixels
 // TODO: Interfaces (Collidable, physics object, etc)
 // TODO: Cleanup - directories grouping same funcionality
+// TODO: Test coverage!
 int main()
 {
     physic::World w;
@@ -26,13 +24,14 @@ int main()
     constexpr double framerate = 100;
     w.setUpdateRate(framerate);
 
-    std::vector<physic::Particle> Particles;
+    constexpr int particleNumber = 200;
+    std::vector<physic::Particle> Particles(particleNumber);
 
-    for(size_t i = 0; i < 200; ++i)
+    for(size_t i = 0; i < particleNumber; ++i)
     {
-        Particles.push_back(physic::Particle(10, materials::Bouncy));
-        Particles[i].position = math::Vector<2>({std::rand() % 800, std::rand() % 600});
-        Particles[i].velocity += math::Vector<2>({0, -std::rand() % 80});
+        Particles[i].setMaterial(materials::Bouncy);
+        Particles[i].setPosition(math::Vector<2>({std::rand() % 800, std::rand() % 600}));
+        Particles[i].setVelocity(math::Vector<2>({0, -std::rand() % 80}));
     }
 
     w.addParticles(Particles);
@@ -42,7 +41,7 @@ int main()
     {
         sf::Time elapsedTime = clock.restart();
         float dt = elapsedTime.asSeconds();
-        std::cout << "FPS: " << std::round(1 / dt) << "\n";
+        // std::cout << "FPS: " << std::round(1 / dt) << "\n";
 
         sf::Event event;
         while(window.pollEvent(event))
@@ -61,8 +60,8 @@ int main()
         for(size_t i = 0; i < Particles.size(); ++i)
         {
             sf::CircleShape c;
-            c.setRadius(Particles[i].getRadius());
-            c.setPosition(Particles[i].position(0), Particles[i].position(1));
+            c.setRadius(Particles[i].getShape().getDistanceToCenter());
+            c.setPosition(Particles[i].getPosition()(0), Particles[i].getPosition()(1));
             window.draw(c);
         }
 

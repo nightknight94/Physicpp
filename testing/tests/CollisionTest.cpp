@@ -2,16 +2,15 @@
 
 #include "CollisionSolver.hpp"
 
-#include "mocks/IShapeMock.hpp"
+// #include "mocks/ShapeMock.hpp"
 
-#include "Body.hpp"
 
 namespace physic
 {
 TEST(CollisionSolverTest, CollisionSolverBasicTest)
 {
-    // IShapeMock s1;
-    // IShapeMock s2;
+    // ShapeMock s1;
+    // ShapeMock s2;
 
     // Body b1;
     // Body b2;

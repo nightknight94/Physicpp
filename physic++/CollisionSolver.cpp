@@ -2,41 +2,30 @@
 
 #include <algorithm>
 
-#include "IShape.hpp"
-#include "Material.hpp"
 #include "Particle.hpp"
 
 namespace physic
 {
-struct CollisionInfo
-{
-    physic::Particle &A;
-    physic::Particle &B;
-    const math::Vector<2> collisionNormal;
-    const double depth;
-    const math::Vector<2> relativeVelocity;
-    const double velocityNormal;
-};
 
 void CollisionSolver::operator()(Particle &a, Particle &b)
 {
-    A = &a;
-    B = &b;
-
     // Don't resolve if a and b points to the same body
     if(&a == &b)
     {
         return;
     }
 
+    A = &a;
+    B = &b;
+
     const double minPossibleDist =
-        B->getRadius() + A->getRadius();
-    const auto distaceBetweenBodies = math::norm(B->position - A->position);
+        B->getShape().getDistanceToCenter() + A->getShape().getDistanceToCenter();
+    const auto distaceBetweenBodies = math::norm(B->getPosition() - A->getPosition());
 
     depth = distaceBetweenBodies - minPossibleDist;
-    collisionNormal = (B->position - A->position) / distaceBetweenBodies;
+    collisionNormal = (B->getPosition() - A->getPosition()) / distaceBetweenBodies;
 
-    relativeVelocity = B->velocity - A->velocity;
+    relativeVelocity = B->getVelocity() - A->getVelocity();
     velocityNormal = math::dotProduct(relativeVelocity, collisionNormal);
 
     // Break if bodies don't collide
@@ -55,23 +44,23 @@ bool CollisionSolver::detected() { return depth < 0; }
 
 void CollisionSolver::resolve()
 {
-    double e = std::min(A->material->m_restitution, B->material->m_restitution);
+    double e = std::min(A->getMaterial().m_restitution, B->getMaterial().m_restitution);
 
     double impulseSkalar = -(1 + e) * velocityNormal;
-    impulseSkalar /= (1 / A->mass + 1 / B->mass);
+    impulseSkalar /= (1 / A->getMass() + 1 / B->getMass());
 
     auto impulse = collisionNormal * impulseSkalar;
 
-    A->velocity -= (impulse * (1 / A->mass));
-    B->velocity += (impulse * (1 / B->mass));
+    A->setVelocity(A->getVelocity() - (impulse * (1 / A->getMass())));
+    B->setVelocity(B->getVelocity() + (impulse * (1 / B->getMass())));
 }
 
 void CollisionSolver::correctPosition()
 {
     double percent = 0.2;
-    math::Vector<2> correction = -depth * percent * collisionNormal / (1 / A->mass + 1 / B->mass);
-    A->position -= correction / A->mass;
-    B->position += correction / B->mass;
+    math::Vector<2> correction = -depth * percent * collisionNormal / (1 / A->getMass() + 1 / B->getMass());
+    A->setPosition(A->getPosition() - correction / A->getMass());
+    B->setPosition(B->getPosition() + correction / B->getMass());
 }
 
 } // namespace physic

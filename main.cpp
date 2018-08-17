@@ -14,6 +14,8 @@
 
 // TODO: Make sure everywhere SI is used
 // TODO: Converter between SI and pixels
+// TODO: Interfaces (Collidable, physics object, etc)
+// TODO: Cleanup - directories grouping same funcionality
 int main()
 {
     physic::World w;

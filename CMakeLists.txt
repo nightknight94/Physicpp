@@ -18,7 +18,7 @@ add_custom_target(full_test
 
 # Add submodules
 set(physic_path ${CMAKE_SOURCE_DIR}/physic++)
-set(test_path ${CMAKE_SOURCE_DIR}/tests)
+set(test_path ${CMAKE_SOURCE_DIR}/testing)
 
 add_subdirectory(${test_path})
 add_subdirectory(${physic_path})

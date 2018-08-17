@@ -9,11 +9,12 @@ set (googletest_path ${gtest_path}/googletest)
 set (googlemock_path ${gtest_path}/googlemock)
 
 include_directories (${physic_path})
+include_directories (${test_path})
 include_directories(${googletest_path}/include)
 include_directories(${googlemock_path}/include)
 
 # Create test executable
-FILE(GLOB test_src ${test_path}/*.cpp)
+FILE(GLOB test_src ${test_path}/tests/*.cpp)
 add_executable(gtests ${test_src})
 target_link_libraries(gtests 
                       physic++

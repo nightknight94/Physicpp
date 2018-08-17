@@ -2,7 +2,7 @@
 
 #include "CollisionSolver.hpp"
 
-// #include "mocks/ShapeMock.hpp"
+#include "mocks/IShapeMock.hpp"
 
 
 namespace physic

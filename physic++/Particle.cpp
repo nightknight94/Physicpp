@@ -6,10 +6,10 @@ namespace physic
 {
 void Particle::update(double dt)
 {
-    setAcceleration(force / mass);
-    force.fill(0);
+	setAcceleration(force / mass);
+	force.fill(0);
 
-    calculateMovement(dt);
+	calculateMovement(dt);
 }
 
 } // namespace physic

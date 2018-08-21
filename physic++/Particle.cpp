@@ -1,9 +1,17 @@
 #include "Particle.hpp"
 
-#include "Shape.hpp"
-
 namespace physic
 {
+void Particle::setRadius(double i_radius)
+{
+	radius = i_radius;
+}
+
+double Particle::getRadius()
+{
+	return radius;
+}
+
 void Particle::update(double dt)
 {
 	setAcceleration(force / mass);

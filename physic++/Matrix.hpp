@@ -8,12 +8,14 @@ namespace math
 template <size_t numberOfRows, size_t numberOfCols>
 class Matrix final
 {
-	private:
+	using Matrix_t = Matrix<numberOfRows, numberOfCols>;
+
+  private:
 	double data[numberOfRows][numberOfCols]{};
 
-	Matrix<numberOfRows, numberOfCols> dealWithZeros(Matrix<numberOfRows, numberOfCols> matrix);
+	Matrix_t dealWithZeros(Matrix_t matrix);
 
-	public:
+  public:
 	Matrix() = default;
 	template <typename T, size_t N>
 	Matrix(const T (&list)[N]);
@@ -32,14 +34,12 @@ class Matrix final
 	double & operator()(unsigned i);
 	const double & operator()(unsigned i) const;
 
-	Matrix<numberOfRows, numberOfCols> & operator+=(double other);
-	Matrix<numberOfRows, numberOfCols> & operator-=(double other);
-	Matrix<numberOfRows, numberOfCols> & operator*=(double other);
+	Matrix_t & operator+=(double other);
+	Matrix_t & operator-=(double other);
+	Matrix_t & operator*=(double other);
 
-	Matrix<numberOfRows, numberOfCols> &
-	operator+=(const Matrix<numberOfRows, numberOfCols> & other);
-	Matrix<numberOfRows, numberOfCols> &
-	operator-=(const Matrix<numberOfRows, numberOfCols> & other);
+	Matrix_t & operator+=(const Matrix_t & other);
+	Matrix_t & operator-=(const Matrix_t & other);
 };
 
 // ---------------Vector alias---------------

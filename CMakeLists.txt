@@ -11,10 +11,12 @@ add_test(NAME tests
 		 DEPENDS gtests)
 
 add_custom_target(full_test
+                  COMMAND make rebuild_cache
 				  COMMAND ctest -T Build				  
 			      COMMAND ctest -V -T Test
 				  COMMAND ctest -T MemCheck
-				  COMMAND ctest -T Coverage)
+				  COMMAND ctest -T Coverage
+                 )
 
 # Add submodules
 set(physic_path ${CMAKE_SOURCE_DIR}/physic++)

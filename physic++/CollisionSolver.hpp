@@ -8,7 +8,7 @@ class Particle;
 
 class CollisionSolver
 {
-	private:
+  private:
 	Particle * A{nullptr};
 	Particle * B{nullptr};
 	math::Vector<2> collisionNormal{};
@@ -20,7 +20,7 @@ class CollisionSolver
 	void resolve();
 	void correctPosition();
 
-	public:
+  public:
 	CollisionSolver() = default;
 	void operator()(Particle & a, Particle & b);
 };

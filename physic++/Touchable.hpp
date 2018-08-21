@@ -2,29 +2,37 @@
 
 #include "Mass.hpp"
 #include "Material.hpp"
-#include "Shape.hpp"
 
 namespace physic
 {
+struct Box
+{
+	math::Vector<2> min;
+	math::Vector<2> max;
+};
+
 class Touchable
 {
-	protected:
-	Mass mass{};
-	Shape shape{};
-	Material material{};
+  protected:
+	double volume;
+	Box box;
+	Mass mass;
+	Material material;
 
-	public:
+  public:
 	virtual ~Touchable() = default;
 
+	virtual double getVolume() { return volume; }
+	virtual const Box & getBox() { return box; };
 	virtual const Mass & getMass() { return mass; };
-	virtual const Shape & getShape() { return shape; };
 	virtual const Material & getMaterial() { return material; };
 
-	virtual void setShape(const Shape & i_shape) { shape = i_shape; };
+	virtual void setVolume(double i_volume) { volume = i_volume; }
+	virtual void setBox(const Box & i_box) { box = i_box; };
 	virtual void setMaterial(const Material & i_material)
 	{
 		material = i_material;
-		mass     = Mass(shape.getVolume() * material.m_density);
+		mass     = Mass(volume * material.m_density);
 	};
 
 	virtual void update(double dt) = 0;

@@ -12,7 +12,7 @@ class RigidBody
     , public Rotatable
     , public Touchable
 {
-	public:
+  public:
 	virtual ~RigidBody() = default;
 
 	virtual void update(double dt) = 0;

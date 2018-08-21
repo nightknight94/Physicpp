@@ -11,11 +11,15 @@ class Particle final
     : public Movable
     , public Touchable
 {
-	protected:
-	math::Vector<2> force{};
+  protected:
+	math::Vector<2> force;
+	double radius{5.0};
 
-	public:
-	Particle() = default;
+  public:
+	Particle() { volume = 3.1415 * radius * radius; }
+
+	void setRadius(double i_radius);
+	double getRadius();
 
 	void addForce(const math::Vector<2> & i_force) { force += i_force; };
 	void update(double dt);

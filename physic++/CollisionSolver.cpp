@@ -17,19 +17,18 @@ void CollisionSolver::operator()(Particle & a, Particle & b)
 	A = &a;
 	B = &b;
 
-	const double minPossibleDist =
-	    B->getShape().getDistanceToCenter() + A->getShape().getDistanceToCenter();
+	const double minPossibleDist    = B->getRadius() + A->getRadius();
 	const auto distaceBetweenBodies = math::norm(B->getPosition() - A->getPosition());
 
-	depth           = distaceBetweenBodies - minPossibleDist;
-	collisionNormal = (B->getPosition() - A->getPosition()) / distaceBetweenBodies;
-
-	relativeVelocity = B->getVelocity() - A->getVelocity();
-	velocityNormal   = math::dotProduct(relativeVelocity, collisionNormal);
+	depth = distaceBetweenBodies - minPossibleDist;
 
 	// Break if bodies don't collide
 	if(detected())
 	{
+		collisionNormal  = (B->getPosition() - A->getPosition()) / distaceBetweenBodies;
+		relativeVelocity = B->getVelocity() - A->getVelocity();
+		velocityNormal   = math::dotProduct(relativeVelocity, collisionNormal);
+
 		// Break if velocities are separating
 		if(velocityNormal < 0)
 		{

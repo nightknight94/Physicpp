@@ -4,7 +4,7 @@ namespace physic
 {
 class Mass
 {
-	private:
+  private:
 	template <typename T>
 	friend auto operator*(const T & left, const Mass & right);
 
@@ -14,7 +14,7 @@ class Mass
 	double mass{};
 	double massInv{};
 
-	public:
+  public:
 	Mass() = default;
 	explicit Mass(double t_mass)
 	    : mass(t_mass)

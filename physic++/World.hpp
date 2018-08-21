@@ -11,7 +11,7 @@ class Particle;
 
 class World
 {
-	private:
+  private:
 	std::vector<Particle *> particles;
 
 	math::Vector<2> gravity;
@@ -22,8 +22,9 @@ class World
 	CollisionSolver collisionSolver;
 	void resolveCollisions();
 	void bruteForceCheck(std::vector<physic::Particle *> p);
+	void bruteForceCheckOptimized(std::vector<physic::Particle *> p);
 
-	public:
+  public:
 	void setGravity(const math::Vector<2> & i_gravity) { gravity = i_gravity; }
 	void setUpdateRate(double i_rate);
 	void addParticles(std::vector<Particle> & i_particles);

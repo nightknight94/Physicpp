@@ -19,10 +19,23 @@ void World::setUpdateRate(double i_rate)
 
 void World::resolveCollisions()
 {
-	bruteForceCheck(particles);
+	bruteForceCheckOptimized(particles);
 }
 
+// 500 particles = 20 fps
 void World::bruteForceCheck(std::vector<physic::Particle *> p)
+{
+	for(size_t i = 0; i < p.size(); ++i)
+	{
+		for(size_t j = 0; j < p.size(); ++j)
+		{
+			collisionSolver((*p[i]), (*p[j]));
+		}
+	}
+}
+
+// 500 particles = 36 fps
+void World::bruteForceCheckOptimized(std::vector<physic::Particle *> p)
 {
 	for(size_t i = 0; i < p.size(); ++i)
 	{

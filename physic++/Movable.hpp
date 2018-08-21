@@ -6,7 +6,7 @@ namespace physic
 {
 class Movable
 {
-	protected:
+  protected:
 	math::Vector<2> position{};
 	math::Vector<2> velocity{};
 	math::Vector<2> acceleration{};
@@ -17,7 +17,7 @@ class Movable
 		position += velocity * dt;
 	}
 
-	public:
+  public:
 	virtual ~Movable() = default;
 
 	virtual const math::Vector<2> & getPosition() const { return position; };

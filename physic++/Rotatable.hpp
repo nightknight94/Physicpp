@@ -6,7 +6,7 @@ namespace physic
 {
 class Rotatable
 {
-	protected:
+  protected:
 	double angle{};
 	double angularVelocity{};
 	double angularAcceleration{};
@@ -17,7 +17,7 @@ class Rotatable
 		angle += angularVelocity * dt;
 	}
 
-	public:
+  public:
 	virtual ~Rotatable() = default;
 
 	virtual double getAngle() const { return angle; };

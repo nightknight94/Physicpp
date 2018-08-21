@@ -29,21 +29,26 @@ constexpr auto px2si(T px)
 int main()
 {
 	physic::World w;
-	w.setGravity(math::Vector<2>({0.0, 9.81}));
+	// w.setGravity(math::Vector<2>({0.0, 9.81}));
 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "");
 
 	constexpr double framerate = 100;
 	w.setUpdateRate(framerate);
 
-	constexpr int particleNumber = 200;
+	constexpr int particleNumber = 500;
 	std::vector<physic::Particle> Particles(particleNumber);
 
 	for(size_t i = 0; i < particleNumber; ++i)
 	{
 		Particles[i].setMaterial(materials::Bouncy);
-		Particles[i].setPosition(math::Vector<2>({std::rand() % 800, std::rand() % 600})); // px2si
-		Particles[i].setVelocity(math::Vector<2>({0, -std::rand() % 80}));
+		Particles[i].setPosition(
+		    math::Vector<2>({(std::rand() % 400) + 200, (std::rand() % 300) + 100})); // px2si
+
+		constexpr int veloAmp = 100;
+		auto velo             = math::Vector<2>({std::rand() % veloAmp, std::rand() % veloAmp});
+		velo                  = (std::rand() % 100) > 50 ? velo : -1 * velo;
+		Particles[i].setVelocity(velo);
 	}
 
 	w.addParticles(Particles);
@@ -71,7 +76,7 @@ int main()
 		for(size_t i = 0; i < Particles.size(); ++i)
 		{
 			sf::CircleShape c;
-			c.setRadius(Particles[i].getShape().getDistanceToCenter());
+			c.setRadius(Particles[i].getRadius());
 			c.setPosition(Particles[i].getPosition()(0),
 			              Particles[i].getPosition()(1)); // si2px
 			window.draw(c);

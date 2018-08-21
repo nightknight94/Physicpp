@@ -6,8 +6,7 @@ template <typename T, size_t N, size_t M>
 ::testing::AssertionResult ArraysMatch(const T (&expected)[N][M],
                                        const math::Matrix<N, M> & matrix);
 template <typename T, size_t N>
-::testing::AssertionResult ArraysMatch(const T (&expected)[N],
-                                       const math::Matrix<N, 1> & matrix);
+::testing::AssertionResult ArraysMatch(const T (&expected)[N], const math::Matrix<N, 1> & matrix);
 
 TEST(MatrixTest, MatrixInitialization)
 {
@@ -142,10 +141,9 @@ TEST(MatrixTest, TransposeDeterminantInverse)
 	EXPECT_FLOAT_EQ(0, math::det(a));
 	EXPECT_FLOAT_EQ(-96, math::det(c));
 
-	ArraysMatch({{-0.96875, -0.4375, 0.03125},
-	             {0.0625, 0.125, 0.0625},
-	             {0.697917, 0.229167, 0.03125}},
-	            math::inv(c));
+	ArraysMatch(
+	    {{-0.96875, -0.4375, 0.03125}, {0.0625, 0.125, 0.0625}, {0.697917, 0.229167, 0.03125}},
+	    math::inv(c));
 }
 
 TEST(MatrixTest, VectorSpecificFreeFunctions)
@@ -156,8 +154,7 @@ TEST(MatrixTest, VectorSpecificFreeFunctions)
 // ---------------------------------------------------------
 
 template <typename T, size_t N, size_t M>
-::testing::AssertionResult ArraysMatch(const T (&expected)[N][M],
-                                       const math::Matrix<N, M> & matrix)
+::testing::AssertionResult ArraysMatch(const T (&expected)[N][M], const math::Matrix<N, M> & matrix)
 {
 	for(size_t i = 0; i < N; ++i)
 	{
@@ -166,9 +163,8 @@ template <typename T, size_t N, size_t M>
 			if(expected[i][j] != matrix(i, j))
 			{
 				return ::testing::AssertionFailure()
-				       << "array[" << i << "] (" << matrix(i, j)
-				       << ") != expected[" << i << "] (" << expected[i][j]
-				       << ")";
+				       << "array[" << i << "] (" << matrix(i, j) << ") != expected[" << i << "] ("
+				       << expected[i][j] << ")";
 			}
 		}
 	}
@@ -176,16 +172,15 @@ template <typename T, size_t N, size_t M>
 }
 
 template <typename T, size_t N>
-::testing::AssertionResult ArraysMatch(const T (&expected)[N],
-                                       const math::Vector<N> & vector)
+::testing::AssertionResult ArraysMatch(const T (&expected)[N], const math::Vector<N> & vector)
 {
 	for(size_t i = 0; i < N; ++i)
 	{
 		if(expected[i] != vector(i))
 		{
 			return ::testing::AssertionFailure()
-			       << "array[" << i << "] (" << vector(i) << ") != expected["
-			       << i << "] (" << expected[i] << ")";
+			       << "array[" << i << "] (" << vector(i) << ") != expected[" << i << "] ("
+			       << expected[i] << ")";
 		}
 	}
 	return ::testing::AssertionSuccess();

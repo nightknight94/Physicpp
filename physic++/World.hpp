@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CollisionSolver.hpp"
-#include "Matrix.hpp"
+#include "utils/Matrix.hpp"
 
 #include <vector>
 

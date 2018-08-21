@@ -1,4 +1,4 @@
-#include "Mass.hpp"
+#include "utils/Mass.hpp"
 
 #include <gtest/gtest.h>
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Movable.hpp"
-#include "Rotatable.hpp"
-#include "Touchable.hpp"
+#include "primitives/Movable.hpp"
+#include "primitives/Rotatable.hpp"
+#include "primitives/Touchable.hpp"
 
 namespace physic
 {

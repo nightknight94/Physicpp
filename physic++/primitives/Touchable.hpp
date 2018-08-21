@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Mass.hpp"
-#include "Material.hpp"
+#include "utils/Mass.hpp"
+#include "utils/Material.hpp"
 
 namespace physic
 {

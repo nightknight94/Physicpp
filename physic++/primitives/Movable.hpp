@@ -4,6 +4,8 @@
 
 namespace physic
 {
+namespace primitives
+{
 class Movable
 {
   protected:
@@ -28,4 +30,5 @@ class Movable
 	virtual void setVelocity(const utils::Vector<2> & i_velocity) { velocity = i_velocity; };
 	virtual void setAcceleration(const utils::Vector<2> & i_acceleration) { acceleration = i_acceleration; };
 };
+} // namespace primitives
 } // namespace physic

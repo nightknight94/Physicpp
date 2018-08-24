@@ -4,6 +4,8 @@
 
 namespace physic
 {
+namespace primitives
+{
 class Rotatable
 {
   protected:
@@ -28,4 +30,5 @@ class Rotatable
 	virtual void setAngularVelocity(const double & i_angularVelocity) { angularVelocity = i_angularVelocity; };
 	virtual void setAngularAcceleration(const double & i_angularAcceleration) { angularAcceleration = i_angularAcceleration; };
 };
+} // namespace primitives
 } // namespace physic

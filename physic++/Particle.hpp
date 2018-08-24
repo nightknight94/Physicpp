@@ -8,8 +8,8 @@ namespace physic
 class Material;
 
 class Particle final
-    : public Movable
-    , public Touchable
+    : public primitives::Movable
+    , public primitives::Touchable
 {
   protected:
 	utils::Vector<2> force;

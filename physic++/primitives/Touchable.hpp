@@ -12,6 +12,8 @@ struct Box
 	utils::Vector<2> max;
 };
 
+namespace primitives
+{
 class Touchable
 {
   protected:
@@ -38,5 +40,5 @@ class Touchable
 
 	virtual void update(double dt) = 0;
 };
-
+} // namespace primitives
 } // namespace physic

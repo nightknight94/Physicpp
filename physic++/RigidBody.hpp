@@ -8,9 +8,9 @@ namespace physic
 {
 // Provides minimal implementation needed for rigid body
 class RigidBody
-    : public Movable
-    , public Rotatable
-    , public Touchable
+    : public primitives::Movable
+    , public primitives::Rotatable
+    , public primitives::Touchable
 {
   public:
 	virtual ~RigidBody() = default;

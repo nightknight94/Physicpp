@@ -11,7 +11,7 @@ add_test(NAME tests
 		 DEPENDS gtests)
 
 add_custom_target(full_test
-                  COMMAND make rebuild_cache
+                  COMMAND ${CMAKE_BUILD_TOOL} rebuild_cache
 				  COMMAND ctest -T Build				  
 			      COMMAND ctest -V -T Test
 				  COMMAND ctest -T MemCheck

@@ -2,6 +2,8 @@
 
 namespace physic
 {
+namespace utils
+{
 class Mass
 {
   private:
@@ -23,15 +25,16 @@ class Mass
 };
 
 template <typename T>
-auto operator*(const T & left, const Mass & right)
+auto operator*(const T & left, const utils::Mass & right)
 {
 	return left * right.mass;
 }
 
 template <typename T>
-auto operator/(const T & left, const Mass & right)
+auto operator/(const T & left, const utils::Mass & right)
 {
 	return left * right.massInv;
 }
 
+} // namespace utils
 } // namespace physic

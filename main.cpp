@@ -24,12 +24,11 @@ constexpr auto px2si(T px)
 // TODO: Make sure everywhere SI is used
 // TODO: Converter between SI and pixels
 // TODO: Interfaces (Collidable, physics object, etc)
-// TODO: Cleanup - directories grouping same funcionality
 // TODO: Test coverage!
 int main()
 {
 	physic::World w;
-	// w.setGravity(math::Vector<2>({0.0, 9.81}));
+	// w.setGravity(physic::utils::Vector<2>({0.0, 9.81}));
 
 	sf::RenderWindow window(sf::VideoMode(800, 600), "");
 
@@ -42,11 +41,10 @@ int main()
 	for(size_t i = 0; i < particleNumber; ++i)
 	{
 		Particles[i].setMaterial(materials::Bouncy);
-		Particles[i].setPosition(
-		    math::Vector<2>({(std::rand() % 400) + 200, (std::rand() % 300) + 100})); // px2si
+		Particles[i].setPosition(physic::utils::Vector<2>({(std::rand() % 400) + 200, (std::rand() % 300) + 100})); // px2si
 
 		constexpr int veloAmp = 100;
-		auto velo             = math::Vector<2>({std::rand() % veloAmp, std::rand() % veloAmp});
+		auto velo             = physic::utils::Vector<2>({std::rand() % veloAmp, std::rand() % veloAmp});
 		velo                  = (std::rand() % 100) > 50 ? velo : -1 * velo;
 		Particles[i].setVelocity(velo);
 	}

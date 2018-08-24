@@ -3,7 +3,9 @@
 #include <iostream>
 #include <math.h>
 
-namespace math
+namespace physic
+{
+namespace utils
 {
 template <size_t numberOfRows, size_t numberOfCols>
 class Matrix final
@@ -60,63 +62,53 @@ template <size_t numberOfElems>
 double norm(const Vector<numberOfElems> & vector);
 
 template <size_t numberOfElems>
-double dotProduct(const Vector<numberOfElems> & left_vector,
-                  const Vector<numberOfElems> & right_vector);
+double dotProduct(const Vector<numberOfElems> & left_vector, const Vector<numberOfElems> & right_vector);
 
 // ---------------Operators---------------
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfRows, numberOfCols> & r_other);
+Matrix<numberOfRows, numberOfCols> operator+(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfRows, numberOfCols> & r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfRows, numberOfCols> & r_other);
+Matrix<numberOfRows, numberOfCols> operator-(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfRows, numberOfCols> & r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfCols, numberOfRows> & r_other);
+Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfCols, numberOfRows> & r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other);
+Matrix<numberOfRows, numberOfCols> operator+(Matrix<numberOfRows, numberOfCols> l_other, double r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other);
+Matrix<numberOfRows, numberOfCols> operator-(Matrix<numberOfRows, numberOfCols> l_other, double r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator*(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other);
+Matrix<numberOfRows, numberOfCols> operator*(Matrix<numberOfRows, numberOfCols> l_other, double r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator/(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other);
+Matrix<numberOfRows, numberOfCols> operator/(Matrix<numberOfRows, numberOfCols> l_other, double r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other);
+Matrix<numberOfRows, numberOfCols> operator+(double l_other, Matrix<numberOfRows, numberOfCols> r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other);
+Matrix<numberOfRows, numberOfCols> operator-(double l_other, Matrix<numberOfRows, numberOfCols> r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator*(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other);
+Matrix<numberOfRows, numberOfCols> operator*(double l_other, Matrix<numberOfRows, numberOfCols> r_other);
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator/(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other);
+Matrix<numberOfRows, numberOfCols> operator/(double l_other, Matrix<numberOfRows, numberOfCols> r_other);
 
-} // namespace math
+} // namespace utils
+} // namespace physic
 
 template <size_t numberOfRows, size_t numberOfCols>
-std::ostream & operator<<(std::ostream & stream,
-                          const math::Matrix<numberOfRows, numberOfCols> & matrix);
+std::ostream & operator<<(std::ostream & stream, const physic::utils::Matrix<numberOfRows, numberOfCols> & matrix);
 
 // ---------------Implementation---------------
 
-namespace math
+namespace physic
+{
+namespace utils
 {
 template <size_t numberOfRows, size_t numberOfCols>
 template <typename T, size_t N>
@@ -244,16 +236,14 @@ Matrix<numberOfRows, numberOfCols> & Matrix<numberOfRows, numberOfCols>::operato
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> & Matrix<numberOfRows, numberOfCols>::
-operator+=(const Matrix<numberOfRows, numberOfCols> & other)
+Matrix<numberOfRows, numberOfCols> & Matrix<numberOfRows, numberOfCols>::operator+=(const Matrix<numberOfRows, numberOfCols> & other)
 {
 	*this = *this + other;
 	return *this;
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> & Matrix<numberOfRows, numberOfCols>::
-operator-=(const Matrix<numberOfRows, numberOfCols> & other)
+Matrix<numberOfRows, numberOfCols> & Matrix<numberOfRows, numberOfCols>::operator-=(const Matrix<numberOfRows, numberOfCols> & other)
 {
 	*this = *this - other;
 	return *this;
@@ -364,8 +354,7 @@ Matrix<numberOfRows, numberOfCols> inv(Matrix<numberOfRows, numberOfCols> matrix
 }
 
 template <size_t numberOfElems>
-double dotProduct(const Vector<numberOfElems> & left_vector,
-                  const Vector<numberOfElems> & right_vector)
+double dotProduct(const Vector<numberOfElems> & left_vector, const Vector<numberOfElems> & right_vector)
 {
 	double accumulator = 0;
 	for(size_t i = 0; i < numberOfElems; ++i)
@@ -382,8 +371,7 @@ double norm(const Vector<numberOfElems> & vector)
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfRows, numberOfCols> & r_other)
+Matrix<numberOfRows, numberOfCols> operator+(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfRows, numberOfCols> & r_other)
 {
 	Matrix<numberOfRows, numberOfCols> result;
 	for(size_t i = 0; i < numberOfRows; ++i)
@@ -397,15 +385,13 @@ Matrix<numberOfRows, numberOfCols> operator+(const Matrix<numberOfRows, numberOf
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfRows, numberOfCols> & r_other)
+Matrix<numberOfRows, numberOfCols> operator-(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfRows, numberOfCols> & r_other)
 {
 	return l_other + (-1 * r_other);
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOfCols> & l_other,
-                                             const Matrix<numberOfCols, numberOfRows> & r_other)
+Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOfCols> & l_other, const Matrix<numberOfCols, numberOfRows> & r_other)
 {
 	Matrix<numberOfRows, numberOfRows> result;
 
@@ -423,8 +409,7 @@ Matrix<numberOfRows, numberOfRows> operator*(const Matrix<numberOfRows, numberOf
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other)
+Matrix<numberOfRows, numberOfCols> operator+(Matrix<numberOfRows, numberOfCols> l_other, double r_other)
 {
 	for(size_t i = 0; i < numberOfRows; ++i)
 	{
@@ -437,15 +422,13 @@ Matrix<numberOfRows, numberOfCols> operator+(Matrix<numberOfRows, numberOfCols> 
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other)
+Matrix<numberOfRows, numberOfCols> operator-(Matrix<numberOfRows, numberOfCols> l_other, double r_other)
 {
 	return l_other + (-1 * r_other);
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator*(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other)
+Matrix<numberOfRows, numberOfCols> operator*(Matrix<numberOfRows, numberOfCols> l_other, double r_other)
 {
 	for(size_t i = 0; i < numberOfRows; ++i)
 	{
@@ -458,36 +441,31 @@ Matrix<numberOfRows, numberOfCols> operator*(Matrix<numberOfRows, numberOfCols> 
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator/(Matrix<numberOfRows, numberOfCols> l_other,
-                                             double r_other)
+Matrix<numberOfRows, numberOfCols> operator/(Matrix<numberOfRows, numberOfCols> l_other, double r_other)
 {
 	return l_other * (1 / r_other);
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator+(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other)
+Matrix<numberOfRows, numberOfCols> operator+(double l_other, Matrix<numberOfRows, numberOfCols> r_other)
 {
 	return r_other + l_other;
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator-(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other)
+Matrix<numberOfRows, numberOfCols> operator-(double l_other, Matrix<numberOfRows, numberOfCols> r_other)
 {
 	return r_other - l_other;
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator*(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other)
+Matrix<numberOfRows, numberOfCols> operator*(double l_other, Matrix<numberOfRows, numberOfCols> r_other)
 {
 	return r_other * l_other;
 }
 
 template <size_t numberOfRows, size_t numberOfCols>
-Matrix<numberOfRows, numberOfCols> operator/(double l_other,
-                                             Matrix<numberOfRows, numberOfCols> r_other)
+Matrix<numberOfRows, numberOfCols> operator/(double l_other, Matrix<numberOfRows, numberOfCols> r_other)
 {
 	for(size_t i = 0; i < numberOfRows; ++i)
 	{
@@ -499,11 +477,11 @@ Matrix<numberOfRows, numberOfCols> operator/(double l_other,
 	return r_other;
 }
 
-} // namespace math
+} // namespace utils
+} // namespace physic
 
 template <size_t numberOfRows, size_t numberOfCols>
-std::ostream & operator<<(std::ostream & stream,
-                          const math::Matrix<numberOfRows, numberOfCols> & matrix)
+std::ostream & operator<<(std::ostream & stream, const physic::utils::Matrix<numberOfRows, numberOfCols> & matrix)
 {
 	for(size_t i = 0; i < numberOfRows; ++i)
 	{

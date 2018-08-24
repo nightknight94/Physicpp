@@ -10,6 +10,6 @@
 // {
 // 	MOCK_CONST_METHOD0(getDistanceToCenter, double());
 // 	MOCK_CONST_METHOD0(getVolume, double());
-// 	MOCK_CONST_METHOD1(getMomentOfInertia, double(const Mass &));
+// 	MOCK_CONST_METHOD1(getMomentOfInertia, double(const utils::Mass &));
 // };
 // } // namespace physic

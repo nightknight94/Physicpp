@@ -18,7 +18,7 @@ void CollisionSolver::operator()(Particle & a, Particle & b)
 	B = &b;
 
 	const double minPossibleDist    = B->getRadius() + A->getRadius();
-	const auto distaceBetweenBodies = math::norm(B->getPosition() - A->getPosition());
+	const auto distaceBetweenBodies = utils::norm(B->getPosition() - A->getPosition());
 
 	depth = distaceBetweenBodies - minPossibleDist;
 
@@ -27,7 +27,7 @@ void CollisionSolver::operator()(Particle & a, Particle & b)
 	{
 		collisionNormal  = (B->getPosition() - A->getPosition()) / distaceBetweenBodies;
 		relativeVelocity = B->getVelocity() - A->getVelocity();
-		velocityNormal   = math::dotProduct(relativeVelocity, collisionNormal);
+		velocityNormal   = utils::dotProduct(relativeVelocity, collisionNormal);
 
 		// Break if velocities are separating
 		if(velocityNormal < 0)
@@ -58,9 +58,8 @@ void CollisionSolver::resolve()
 
 void CollisionSolver::correctPosition()
 {
-	double percent = 0.2;
-	math::Vector<2> correction =
-	    -depth * percent * collisionNormal / (1 / A->getMass() + 1 / B->getMass());
+	double percent              = 0.2;
+	utils::Vector<2> correction = -depth * percent * collisionNormal / (1 / A->getMass() + 1 / B->getMass());
 	A->setPosition(A->getPosition() - correction / A->getMass());
 	B->setPosition(B->getPosition() + correction / B->getMass());
 }

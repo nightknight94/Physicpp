@@ -11,7 +11,7 @@ TEST(WorldTest, WorldBasicTest)
 	// Body body;
 
 	// world.addObject(body);
-	// world.setGravity(math::Vector<2>({0, 0}));
+	// world.setGravity(physic::utils::Vector<2>({0, 0}));
 	// world.update(0.01);
 }
 } // namespace physic

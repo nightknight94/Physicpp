@@ -25,13 +25,7 @@ class Rotatable
 	virtual double getAngularAcceleration() const { return angularAcceleration; };
 
 	virtual void setAngle(const double & i_angle) { angle = i_angle; };
-	virtual void setAngularVelocity(const double & i_angularVelocity)
-	{
-		angularVelocity = i_angularVelocity;
-	};
-	virtual void setAngularAcceleration(const double & i_angularAcceleration)
-	{
-		angularAcceleration = i_angularAcceleration;
-	};
+	virtual void setAngularVelocity(const double & i_angularVelocity) { angularVelocity = i_angularVelocity; };
+	virtual void setAngularAcceleration(const double & i_angularAcceleration) { angularAcceleration = i_angularAcceleration; };
 };
 } // namespace physic

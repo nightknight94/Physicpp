@@ -14,7 +14,7 @@ class World
   private:
 	std::vector<Particle *> particles;
 
-	math::Vector<2> gravity;
+	utils::Vector<2> gravity;
 
 	double updateRateInv{};
 	double updateTimer{};
@@ -25,7 +25,7 @@ class World
 	void bruteForceCheckOptimized(std::vector<physic::Particle *> p);
 
   public:
-	void setGravity(const math::Vector<2> & i_gravity) { gravity = i_gravity; }
+	void setGravity(const utils::Vector<2> & i_gravity) { gravity = i_gravity; }
 	void setUpdateRate(double i_rate);
 	void addParticles(std::vector<Particle> & i_particles);
 

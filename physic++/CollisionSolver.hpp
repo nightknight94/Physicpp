@@ -11,9 +11,9 @@ class CollisionSolver
   private:
 	Particle * A{nullptr};
 	Particle * B{nullptr};
-	math::Vector<2> collisionNormal{};
+	utils::Vector<2> collisionNormal{};
 	double depth{};
-	math::Vector<2> relativeVelocity{};
+	utils::Vector<2> relativeVelocity{};
 	double velocityNormal{};
 
 	bool detected();

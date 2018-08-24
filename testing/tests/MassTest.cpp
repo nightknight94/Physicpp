@@ -6,8 +6,8 @@ namespace physic
 {
 TEST(MassTest, MassOperatorsTest)
 {
-	Mass m1(100);
-	Mass m2(0);
+	utils::Mass m1(100);
+	utils::Mass m2(0);
 
 	EXPECT_EQ(100, 1 * m1);
 	EXPECT_FLOAT_EQ(0.01, 1 / m1);

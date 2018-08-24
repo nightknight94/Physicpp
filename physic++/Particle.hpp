@@ -12,7 +12,7 @@ class Particle final
     , public Touchable
 {
   protected:
-	math::Vector<2> force;
+	utils::Vector<2> force;
 	double radius{5.0};
 
   public:
@@ -21,7 +21,7 @@ class Particle final
 	void setRadius(double i_radius);
 	double getRadius();
 
-	void addForce(const math::Vector<2> & i_force) { force += i_force; };
+	void addForce(const utils::Vector<2> & i_force) { force += i_force; };
 	void update(double dt);
 };
 } // namespace physic

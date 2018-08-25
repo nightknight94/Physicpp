@@ -1,5 +1,6 @@
 #include "Particle.hpp"
 #include "World.hpp"
+#include "physic++/utils/Convert.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -7,26 +8,13 @@
 #include <random>
 #include <vector>
 
-constexpr int SI_PX_CONVERT = 100;
-
-template <typename T>
-constexpr auto si2px(T si)
-{
-	return si * SI_PX_CONVERT;
-}
-
-template <typename T>
-constexpr auto px2si(T px)
-{
-	return px / SI_PX_CONVERT;
-}
-
 // TODO: Make sure everywhere SI is used
-// TODO: Converter between SI and pixels
 // TODO: Interfaces (Collidable, physics object, etc)
 // TODO: Test coverage!
 int main()
 {
+	physic::utils::Convert convert(100);
+
 	physic::World w;
 	// w.setGravity(physic::utils::Vector<2>({0.0, 9.81}));
 
@@ -36,20 +24,24 @@ int main()
 	w.setUpdateRate(framerate);
 
 	constexpr int particleNumber = 500;
-	std::vector<physic::Particle> Particles(particleNumber);
+	std::vector<physic::Particle> particles;
 
 	for(size_t i = 0; i < particleNumber; ++i)
 	{
-		Particles[i].setMaterial(materials::Bouncy);
-		Particles[i].setPosition(physic::utils::Vector<2>({(std::rand() % 400) + 200, (std::rand() % 300) + 100})); // px2si
+		physic::Particle particle(convert.px2si(5));
+		particle.setMaterial(materials::Bouncy);
+		particle.setPosition(
+		    convert.px2si(physic::utils::Vector<2>({(std::rand() % 400) + 200, (std::rand() % 300) + 100}))); // px2si
 
 		constexpr int veloAmp = 100;
 		auto velo             = physic::utils::Vector<2>({std::rand() % veloAmp, std::rand() % veloAmp});
 		velo                  = (std::rand() % 100) > 50 ? velo : -1 * velo;
-		Particles[i].setVelocity(velo);
+		particle.setVelocity(convert.px2si(velo));
+
+		particles.push_back(particle);
 	}
 
-	w.addParticles(Particles);
+	w.addParticles(particles);
 
 	sf::Clock clock;
 	while(window.isOpen())
@@ -71,12 +63,12 @@ int main()
 
 		w.update(dt);
 
-		for(size_t i = 0; i < Particles.size(); ++i)
+		for(size_t i = 0; i < particles.size(); ++i)
 		{
 			sf::CircleShape c;
-			c.setRadius(Particles[i].getRadius());
-			c.setPosition(Particles[i].getPosition()(0),
-			              Particles[i].getPosition()(1)); // si2px
+			c.setRadius(convert.si2px(particles[i].getRadius()));
+			c.setPosition(convert.si2px(particles[i].getPosition()(0)),
+			              convert.si2px(particles[i].getPosition()(1))); // si2px
 			window.draw(c);
 		}
 

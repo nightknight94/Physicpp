@@ -13,14 +13,21 @@ class Particle final
 {
   protected:
 	utils::Vector<2> force;
-	double radius{5.0};
+	double radius;
+
+	void updateVolume();
 
   public:
-	Particle() { volume = 3.1415 * radius * radius; }
+	explicit Particle(double i_radius)
+	    : radius(i_radius)
+	{
+		updateVolume();
+	}
 
 	void setRadius(double i_radius);
 	double getRadius();
 
+	// TODO: Make sure force is added once per update
 	void addForce(const utils::Vector<2> & i_force) { force += i_force; };
 	void update(double dt);
 };

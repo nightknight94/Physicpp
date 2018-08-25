@@ -5,6 +5,12 @@ namespace physic
 void Particle::setRadius(double i_radius)
 {
 	radius = i_radius;
+	updateVolume();
+}
+
+void Particle::updateVolume()
+{
+	volume = 3.1415 * radius * radius;
 }
 
 double Particle::getRadius()
